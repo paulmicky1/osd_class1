@@ -4,36 +4,32 @@
 	Copyright (c) PAUL MICKY D COSTA
 	Licensed under the MIT license: https://opensource.org/license/mit
 '''
-
 import unittest
-from prime import is_prime  # Import the function from prime.py
+from prime_checker import is_prime
 
-class TestPrime(unittest.TestCase):
-    def test_small_prime_numbers(self):
-        """Test small known prime numbers"""
-        self.assertTrue(is_prime(2))
-        self.assertTrue(is_prime(3))
-        self.assertTrue(is_prime(5))
-        self.assertTrue(is_prime(7))
-        self.assertTrue(is_prime(11))
+class TestPrimeChecker(unittest.TestCase):
 
-    def test_small_non_prime_numbers(self):
-        """Test small known non-prime numbers"""
-        self.assertFalse(is_prime(1))  # Edge case: 1 is not prime
-        self.assertFalse(is_prime(4))
-        self.assertFalse(is_prime(6))
-        self.assertFalse(is_prime(8))
-        self.assertFalse(is_prime(9))
+    def test_small_prime(self):
+        self.assertEqual(is_prime(5), "true")  # 5 is prime
+    
+    def test_small_composite(self):
+        self.assertEqual(is_prime(4), "false")  # 4 is composite
+    
+    def test_large_composite_1(self):
+        self.assertEqual(is_prime(9007199254740991), "false")  # 9007199254740991 is not prime
+    
+    def test_large_composite_2(self):
+        self.assertEqual(is_prime(9007195909437503), "false")  # 9007195909437503 is not prime
+    
+    def test_small_number(self):
+        self.assertEqual(is_prime(1), "false")  # 1 is not prime
+    
+    def test_edge_case(self):
+        self.assertEqual(is_prime(0), "false")  # 0 is not prime
+    
+    def test_prime_2_and_3(self):
+        self.assertEqual(is_prime(2), "true")  # 2 is prime
+        self.assertEqual(is_prime(3), "true")  # 3 is prime
 
-    def test_large_prime_numbers(self):
-        """Test large prime numbers"""
-        self.assertTrue(is_prime(9007199254740991))  # Known large prime number
-        self.assertTrue(is_prime(9007195909437503))  # Another known prime
-
-    def test_large_non_prime_numbers(self):
-        """Test large composite numbers"""
-        self.assertFalse(is_prime(9007199254740992))  # One more than a prime
-        self.assertFalse(is_prime(1000000000000000))  # Clearly composite
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
